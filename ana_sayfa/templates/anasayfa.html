@@ -1,18 +1,42 @@
 {% extends 'base.html' %}
 
 {% block icerik %}
-    <h2 style="color: white;">Projelerim</h2>
-    
-    {% for proje in projeler %}
-        <div class="kart" style="background: white; color: black; padding: 20px; border-radius: 15px; margin: 20px auto; width: 400px; box-shadow: 0px 10px 25px rgba(0,0,0,0.3);">
-            <h3>{{ proje.baslik }}</h3>
-            <p>{{ proje.detay|truncatechars:100 }}</p>
-            
-            <a href="{% url 'proje_detay' proje.id %}">
-                <button style="background: #764ba2; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer;">Daha Fazla</button>
-            </a>
-        </div>
-    {% empty %}
-        <p style="color: white;">Henüz bir proje eklenmemiş.</p>
-    {% endfor %}
+<style>
+    /* Cam Efekti (Glassmorphism) Stili */
+    .kart {
+        background: rgba(255, 255, 255, 0.2); /* Yarı saydam beyaz */
+        backdrop-filter: blur(10px);          /* Arkasını bulanıklaştırır */
+        -webkit-backdrop-filter: blur(10px);  /* Safari desteği için */
+        border: 1px solid rgba(255, 255, 255, 0.3); /* İnce bir cam kenarı */
+        color: white;
+        padding: 25px;
+        border-radius: 20px;
+        margin: 20px auto;
+        width: 400px;
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    }
+    h3 { color: #ffffff; }
+    button {
+        background: rgba(255, 255, 255, 0.3);
+        border: 1px solid white;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    button:hover { background: rgba(255, 255, 255, 0.5); }
+</style>
+
+<h2 style="color: white; text-align: center;">Projelerim</h2>
+
+{% for proje in projeler %}
+    <div class="kart">
+        <h3>{{ proje.baslik }}</h3>
+        <p>{{ proje.detay|truncatechars:100 }}</p>
+        <a href="{% url 'proje_detay' proje.id %}">
+            <button>Daha Fazla</button>
+        </a>
+    </div>
+{% endfor %}
 {% endblock %}
